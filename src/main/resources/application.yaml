@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: breathe
+  datasource:
+    platform: POSTGRESQL
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: L^t19VY@2*3j
+  jpa:
+    generate-ddl: true
+    open-in-view: true
+    hibernate.naming.implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl
+    hibernate.naming.physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernte.default_schema: hibernate
+      hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+      hibernate.jdbc.lob.non_contextual_creation: true
+      hibernate.current_session_context_class: org.springframework.orm.hibernate5.SpringSessionContext
+  flyway:
+    encoding: UTF-8
+    schemas:
+      - hibernate
+    table: schema_version
+    locations:
+      - classpath:db/migration
+    baselineOnMigrate: false
+    validateOnMigrate: true
