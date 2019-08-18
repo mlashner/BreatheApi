@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "Workshops")
@@ -32,5 +32,5 @@ public class Workshop extends Base {
     private LocalDateTime endTime;
 
     @OneToMany(mappedBy = "workshop")
-    private Set<Favorite> favorites;
+    private List<Favorite> favorites;
 }

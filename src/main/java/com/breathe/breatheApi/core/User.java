@@ -8,7 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "Users")
@@ -23,5 +23,5 @@ public class User extends Base {
     private String full_name;
 
     @OneToMany(mappedBy = "user")
-    private Set<Favorite> favorites;
+    private List<Favorite> favorites;
 }
