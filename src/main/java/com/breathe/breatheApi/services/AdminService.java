@@ -6,9 +6,11 @@ import com.breathe.breatheApi.repositories.AdminRepository;
 import com.breathe.breatheApi.repositories.UserRepository;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class AdminService {
     @Autowired
     private AdminRepository adminRepository;

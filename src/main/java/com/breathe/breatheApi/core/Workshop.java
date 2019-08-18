@@ -2,6 +2,7 @@ package com.breathe.breatheApi.core;
 
 import com.breathe.breatheApi.enums.Location;
 import com.breathe.breatheApi.enums.WorkshopType;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -39,13 +40,16 @@ public class Workshop extends Base {
     private LocalDateTime endTime;
 
     @OneToMany(mappedBy = "workshop")
+    @JsonIgnoreProperties("workshop")
     private List<Favorite> favorites;
 
     @ManyToOne
     @JoinColumn(name = "primary_instructor_id")
+    @JsonIgnoreProperties("primaryWorkshops")
     private User primaryInstructor;
 
     @ManyToOne
     @JoinColumn(name = "secondary_instructor_id")
+    @JsonIgnoreProperties("secondaryWorkshops")
     private User secondaryInstructor;
 }

@@ -1,5 +1,6 @@
 package com.breathe.breatheApi.core;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,17 +20,20 @@ public class User extends Base {
     private String email;
 
     @Column(name = "full_name")
-    private String full_name;
+    private String fullName;
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
+    @JsonIgnoreProperties("user")
     private Admin admin;
 
     @OneToMany(mappedBy = "user")
     private List<Favorite> favorites;
 
     @OneToMany(mappedBy = "primaryInstructor")
+    @JsonIgnoreProperties("primaryInstructor")
     private List<Workshop> workshops;
 
     @OneToMany(mappedBy = "secondaryInstructor")
+    @JsonIgnoreProperties("secondaryInstructor")
     private List<Workshop> secondaryWorkshops;
 }

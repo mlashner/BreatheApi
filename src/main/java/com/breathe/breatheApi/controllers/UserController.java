@@ -1,4 +1,4 @@
-package controllers;
+package com.breathe.breatheApi.controllers;
 
 import com.breathe.breatheApi.core.User;
 import com.breathe.breatheApi.services.UserService;
@@ -9,7 +9,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1/users")
+@RequestMapping(value = "/users")
 public class UserController {
     @Autowired
     private UserService userService;

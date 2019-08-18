@@ -1,4 +1,4 @@
-package controllers;
+package com.breathe.breatheApi.controllers;
 
 import com.breathe.breatheApi.core.Workshop;
 import com.breathe.breatheApi.services.WorkshopService;
@@ -9,7 +9,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1/workshops")
+@RequestMapping("/workshops")
 public class WorkshopController {
     @Autowired
     private WorkshopService workshopService;

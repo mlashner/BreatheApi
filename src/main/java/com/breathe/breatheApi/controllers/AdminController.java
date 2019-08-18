@@ -1,4 +1,4 @@
-package controllers;
+package com.breathe.breatheApi.controllers;
 
 import com.breathe.breatheApi.core.Admin;
 import com.breathe.breatheApi.services.AdminService;
@@ -9,7 +9,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1/admins")
+@RequestMapping(value = "/admins")
 public class AdminController {
     @Autowired
     private AdminService adminService;
