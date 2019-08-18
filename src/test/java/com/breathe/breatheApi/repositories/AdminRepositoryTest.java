@@ -5,13 +5,11 @@ import com.breathe.breatheApi.core.Admin;
 import com.breathe.breatheApi.core.User;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Optional;
 
 import static org.junit.Assert.*;
 
-@SpringBootTest
 public class AdminRepositoryTest extends BreatheApiApplicationTests {
     @Autowired
     private AdminRepository adminRepository;
