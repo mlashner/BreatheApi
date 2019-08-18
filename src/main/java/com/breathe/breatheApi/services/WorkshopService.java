@@ -32,6 +32,8 @@ public class WorkshopService {
         oldWorkshop.setDescription(workshop.getDescription());
         oldWorkshop.setStartTime(workshop.getStartTime());
         oldWorkshop.setEndTime(workshop.getEndTime());
+        oldWorkshop.setPrimaryInstructor(workshop.getPrimaryInstructor());
+        oldWorkshop.setSecondaryInstructor(workshop.getSecondaryInstructor());
         return workshopRepository.save(oldWorkshop);
     }
 

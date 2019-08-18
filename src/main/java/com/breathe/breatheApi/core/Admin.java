@@ -8,17 +8,16 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "favorites")
+@Table(name = "admins")
 @Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Favorite extends Base {
-    @ManyToOne
+public class Admin extends Base {
+    @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "workshop_id")
-    private Workshop workshop;
+    @Column(name = "password_hash")
+    private String passwordHash;
 }
