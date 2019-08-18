@@ -3,7 +3,7 @@ spring:
     name: breathe
   datasource:
     platform: POSTGRESQL
-    url: jdbc:postgresql://localhost:5432/postgres
+    url: jdbc:postgresql://localhost:5432/breathe
     username: postgres
     password: L^t19VY@2*3j
   jpa:

@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: breathe
+  datasource:
+    url: jdbc:postgresql://localhost:5432/breathe_test
+    username: postgres
+    password: L^t19VY@2*3j
+  jpa:
+    show-sql: true
+  flyway:
+    locations:
+      - classpath:db/migration
