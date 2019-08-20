@@ -3,6 +3,8 @@ package com.breathe.breatheApi.core;
 import com.breathe.breatheApi.enums.Location;
 import com.breathe.breatheApi.enums.WorkshopType;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -33,9 +35,11 @@ public class Workshop extends Base {
     @Column(name = "description")
     private String description;
 
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @Column(name = "start_time")
     private LocalDateTime startTime;
 
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @Column(name = "end_time")
     private LocalDateTime endTime;
 
