@@ -1,34 +1,36 @@
-CREATE SEQUENCE user_seq START 0 INCREMENT 1;
+CREATE SEQUENCE user_seq START 1 INCREMENT 1;
 
-CREATE TABLE users (
+CREATE TABLE hibernate.users (
     id INTEGER,
+    installation_id VARCHAR,
     email VARCHAR,
     full_name VARCHAR,
 
     PRIMARY KEY(id),
+    UNIQUE(installation_id)
 );
 
-CREATE SEQUENCE workshop_seq START 0 INCREMENT 1;
+CREATE SEQUENCE workshop_seq START 1 INCREMENT 1;
 
-CREATE TABLE workshops (
+CREATE TABLE hibernate.workshops (
     id INTEGER,
     title VARCHAR,
     location VARCHAR,
     type VARCHAR,
-    description VARCHAR,
+    description TEXT,
     start_time TIMESTAMP,
     end_time TIMESTAMP,
-    primary_instructor_id, INTEGER,
-    secondary_instructor_id INTEGER NULL,
+    primary_instructor_id INTEGER,
+    secondary_instructor_id INTEGER,
 
     PRIMARY KEY(id),
     FOREIGN KEY(primary_instructor_id) REFERENCES users (id),
-    FOREIGN KEY(secondary_instructor_id) REFERENCES users (id),
+    FOREIGN KEY(secondary_instructor_id) REFERENCES users (id)
 );
 
-CREATE SEQUENCE favorite_seq START 0 INCREMENT 1;
+CREATE SEQUENCE favorite_seq START 1 INCREMENT 1;
 
-CREATE TABLE favorites (
+CREATE TABLE hibernate.favorites (
     id INTEGER,
     user_id INTEGER,
     workshop_id INTEGER,
@@ -38,9 +40,9 @@ CREATE TABLE favorites (
     FOREIGN KEY (workshop_id) REFERENCES workshops (id)
 );
 
-CREATE SEQUENCE admin_seq START 0 INCREMENT 1;
+CREATE SEQUENCE admin_seq START 1 INCREMENT 1;
 
-CREATE TABLE admins (
+CREATE TABLE hibernate.admins (
     id INTEGER,
     user_id INTEGER,
     password_hash VARCHAR,

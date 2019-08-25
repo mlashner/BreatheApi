@@ -16,6 +16,7 @@ public class WorkshopController {
 
     @GetMapping
     public List<Workshop> getAllWorkshops() {
+        workshopService.populateWorkshops();
         return workshopService.findAll();
     }
 

@@ -7,7 +7,7 @@ spring:
     username: postgres
     password: L^t19VY@2*3j
   jpa:
-    generate-ddl: true
+    generate-ddl: false
     open-in-view: true
     hibernate.naming.implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl
     hibernate.naming.physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl

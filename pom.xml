@@ -69,6 +69,7 @@
 				<configuration>
 					<user>postgres</user>
 					<password>L^t19VY@2*3j</password>
+					<url>jdbc:postgresql://localhost:5432/breathe</url>
 					<schemas>
 						<schema>hibernate</schema>
 					</schemas>

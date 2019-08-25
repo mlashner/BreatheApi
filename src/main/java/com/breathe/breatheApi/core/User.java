@@ -10,7 +10,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "users")
+@Table(name = "hibernate.users")
 @Builder
 @Data
 @AllArgsConstructor

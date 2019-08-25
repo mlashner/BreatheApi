@@ -2,6 +2,7 @@ package com.breathe.breatheApi.services;
 
 import com.breathe.breatheApi.core.Workshop;
 import com.breathe.breatheApi.repositories.WorkshopRepository;
+import com.breathe.breatheApi.utils.WorkshopUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,5 +40,10 @@ public class WorkshopService {
 
     public void deleteWorkshop(Long id) {
         workshopRepository.delete(findById(id));
+    }
+
+    public void populateWorkshops() {
+        workshopRepository.saveAll(WorkshopUtils.generateWorkshops());
+        workshopRepository.flush();
     }
 }

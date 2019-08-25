@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "favorites")
+@Table(name = "hibernate.favorites")
 @Builder
 @Data
 @AllArgsConstructor

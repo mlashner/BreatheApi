@@ -19,9 +19,9 @@ public class UserController {
         return userService.findAll();
     }
 
-    @GetMapping("/{id}")
-    public UserDTO getUserById(@PathVariable(value = "id") String id) {
-        return userService.findByInstallationId(id);
+    @GetMapping("/{installationId}")
+    public UserDTO getUserById(@PathVariable(value = "installationId") String installationId) {
+        return userService.findByInstallationId(installationId);
     }
 
     @PostMapping

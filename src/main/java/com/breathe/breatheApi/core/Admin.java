@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "admins")
+@Table(name = "hibernate.admins")
 @Builder
 @Data
 @AllArgsConstructor
