@@ -2,7 +2,6 @@ package com.breathe.breatheApi.services;
 
 import com.breathe.breatheApi.core.Workshop;
 import com.breathe.breatheApi.repositories.WorkshopRepository;
-import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,8 +17,7 @@ public class WorkshopService {
     }
 
     public Workshop findById(Long id) {
-        return workshopRepository.findById(id)
-                .orElseThrow(() -> new ObjectNotFoundException(Workshop.class, "Workshop not found for id :: " + id));
+        return workshopRepository.findById(id).orElse(null);
     }
 
     public Workshop createWorkshop(Workshop workshop) {

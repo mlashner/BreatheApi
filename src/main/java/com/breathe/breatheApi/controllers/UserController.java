@@ -1,11 +1,11 @@
 package com.breathe.breatheApi.controllers;
 
-import com.breathe.breatheApi.core.User;
+import com.breathe.breatheApi.api.UserDTO;
+import com.breathe.breatheApi.api.UserDTOContainer;
 import com.breathe.breatheApi.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -15,17 +15,17 @@ public class UserController {
     private UserService userService;
 
     @GetMapping
-    public List<User> getAllUsers() {
+    public List<UserDTO> getAllUsers() {
         return userService.findAll();
     }
 
     @GetMapping("/{id}")
-    public User getUserById(@PathVariable(value = "id") Long id) {
-        return userService.findById(id);
+    public UserDTO getUserById(@PathVariable(value = "id") String id) {
+        return userService.findByInstallationId(id);
     }
 
     @PostMapping
-    public User createUser(@Valid @RequestBody User user) {
-        return userService.createUser(user);
+    public UserDTO createUser(@RequestBody UserDTOContainer userDTOContainer) {
+        return userService.createUser(userDTOContainer.getUserDTO().convertToUser());
     }
 }

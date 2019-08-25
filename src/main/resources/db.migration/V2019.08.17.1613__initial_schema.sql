@@ -5,7 +5,7 @@ CREATE TABLE users (
     email VARCHAR,
     full_name VARCHAR,
 
-    PRIMARY KEY(id)
+    PRIMARY KEY(id),
 );
 
 CREATE SEQUENCE workshop_seq START 0 INCREMENT 1;

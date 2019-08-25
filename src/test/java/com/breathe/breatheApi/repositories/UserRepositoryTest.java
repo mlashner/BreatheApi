@@ -18,6 +18,7 @@ public class UserRepositoryTest extends BreatheApiApplicationTests {
         User user = User.builder()
                 .email("tow.sawyer@rush.edu")
                 .fullName("Tom Sawyer")
+                .installationId("thisIsAnId")
                 .build();
 
         User newUser = userRepository.save(user);
@@ -27,6 +28,7 @@ public class UserRepositoryTest extends BreatheApiApplicationTests {
         assertTrue(optional.isPresent());
 
         assertEquals(optional.get().getFullName(), "Tom Sawyer");
+        assertEquals(optional.get().getInstallationId(), "thisIsAnId");
     }
 
     @Test

@@ -16,6 +16,9 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class User extends Base {
+    @Column(name = "installation_id")
+    private String installationId;
+
     @Column(name = "email")
     private String email;
 

@@ -1,29 +1,36 @@
 package com.breathe.breatheApi.services;
 
+import com.breathe.breatheApi.api.UserDTO;
 import com.breathe.breatheApi.core.User;
 import com.breathe.breatheApi.repositories.UserRepository;
-import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public List<User> findAll() {
-        return userRepository.findAll();
+    public List<UserDTO> findAll() {
+        return userRepository.findAll()
+                .stream()
+                .map(UserDTO::convertUserToUserDTO)
+                .collect(Collectors.toList());
     }
 
-    public User findById(Long id) {
-        return userRepository.findById(id)
-                .orElseThrow(() -> new ObjectNotFoundException(User.class, "User not found for id :: " + id));
+    public UserDTO findById(Long id) {
+        return UserDTO.convertUserToUserDTO(userRepository.findById(id).orElse(null));
     }
 
-    public User createUser(User user) {
+    public UserDTO findByInstallationId(String installationId) {
+        return UserDTO.convertUserToUserDTO(userRepository.findByInstallationId(installationId).orElse(null));
+    }
+
+    public UserDTO createUser(User user) {
         // TODO: check if user email exists before creating new user
-        return userRepository.save(user);
+        return UserDTO.convertUserToUserDTO(userRepository.save(user));
     }
 }
