@@ -16,7 +16,6 @@ public class WorkshopController {
 
     @GetMapping
     public List<Workshop> getAllWorkshops() {
-        workshopService.populateWorkshops();
         return workshopService.findAll();
     }
 
@@ -38,5 +37,11 @@ public class WorkshopController {
     @DeleteMapping("/{id}")
     public void deleteWorkshop(@PathVariable(value = "id") Long id) {
         workshopService.deleteWorkshop(id);
+    }
+
+    @PostMapping("/populate")
+    public boolean populate() {
+        workshopService.populateWorkshops();
+        return true;
     }
 }
