@@ -1,6 +1,7 @@
 package com.breathe.breatheApi.controllers;
 
 import com.breathe.breatheApi.core.Favorite;
+import com.breathe.breatheApi.core.Workshop;
 import com.breathe.breatheApi.services.FavoriteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +15,7 @@ public class FavoriteController {
     private FavoriteService favoriteService;
 
     @GetMapping("/{userId}")
-    public List<Favorite> getFavoritesByUserId(@PathVariable(value = "userId") Long userId) {
+    public List<Workshop> getFavoritesByUserId(@PathVariable(value = "userId") Long userId) {
         return favoriteService.getFavoritesByUserId(userId);
     }
 
@@ -23,8 +24,8 @@ public class FavoriteController {
         return favoriteService.createFavorite(userId, workshopId);
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteFavoriteById(@PathVariable(value = "id") Long id) {
-        favoriteService.deleteFavorite(id);
+    @DeleteMapping
+    public void deleteFavoriteById(Long userId, Long workshopId) {
+        favoriteService.deleteFavorite(userId, workshopId);
     }
 }

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class FavoriteService {
@@ -28,10 +29,10 @@ public class FavoriteService {
                 .orElseThrow(() -> new ObjectNotFoundException(Favorite.class, "Favorite not found for id :: " + id));
     }
 
-    public List<Favorite> getFavoritesByUserId(Long userId) {
+    public List<Workshop> getFavoritesByUserId(Long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ObjectNotFoundException(User.class, "User not found for id :: " + userId));
-        return user.getFavorites();
+        return user.getFavorites().stream().map(Favorite::getWorkshop).collect(Collectors.toList());
     }
 
     public Favorite createFavorite(Long userId, Long workshopId) {
@@ -48,7 +49,8 @@ public class FavoriteService {
         return favoriteRepository.save(favorite);
     }
 
-    public void deleteFavorite(Long id) {
-        favoriteRepository.delete(findById(id));
+    public void deleteFavorite(Long userId, Long workshopId) {
+        favoriteRepository.delete(favoriteRepository.findByUserIdAndWorkshopId(userId, workshopId)
+                .orElseThrow(() -> new ObjectNotFoundException(User.class, "Favorite not found")));
     }
 }
