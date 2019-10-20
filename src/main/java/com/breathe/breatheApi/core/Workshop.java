@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Table(name = "hibernate.workshops")
+@Table(name = "workshops")
 @Builder
 @Data
 @AllArgsConstructor
