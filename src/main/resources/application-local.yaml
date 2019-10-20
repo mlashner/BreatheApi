@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    platform: POSTGRESQL
+    url: jdbc:postgresql://localhost:5432/breathe
+    username: postgres
+    password: L^t19VY@2*3j
