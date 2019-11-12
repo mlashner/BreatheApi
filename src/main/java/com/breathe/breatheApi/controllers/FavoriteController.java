@@ -25,7 +25,7 @@ public class FavoriteController {
     }
 
     @DeleteMapping
-    public void deleteFavoriteById(Long userId, Long workshopId) {
+    public void deleteFavoriteByUserIdAndWorkshopId(Long userId, Long workshopId) {
         favoriteService.deleteFavorite(userId, workshopId);
     }
 }
