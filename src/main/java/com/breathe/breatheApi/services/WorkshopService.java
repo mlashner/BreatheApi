@@ -1,11 +1,19 @@
 package com.breathe.breatheApi.services;
 
 import com.breathe.breatheApi.core.Workshop;
+import com.breathe.breatheApi.enums.Location;
+import com.breathe.breatheApi.enums.WorkshopType;
 import com.breathe.breatheApi.repositories.WorkshopRepository;
-import com.breathe.breatheApi.utils.WorkshopUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -42,8 +50,99 @@ public class WorkshopService {
         workshopRepository.delete(findById(id));
     }
 
-    public void populateWorkshops() {
-        workshopRepository.saveAll(WorkshopUtils.generateWorkshops());
+    public void populateWorkshops() throws IOException {
+        List<Workshop> workshops = readWorkshops();
+        workshopRepository.saveAll(workshops);
         workshopRepository.flush();
+    }
+
+    private List<Workshop> readWorkshops() throws IOException {
+        List<Workshop> workshops = new ArrayList<>();
+        URL url = getClass().getClassLoader().getResource("workshops_2019.tsv");
+        System.out.println(url);
+        BufferedReader csvReader = new BufferedReader(new FileReader(url.getPath()));
+        String header = csvReader.readLine();
+        String _appInfo_ = csvReader.readLine();
+        String row = csvReader.readLine();
+        while (row != null) {
+            Workshop workshop = createWorkshopFromCsv(row, header);
+            if (workshop != null) {
+                workshops.add(workshop);
+            }
+            row = csvReader.readLine();
+        }
+        csvReader.close();
+        return workshops;
+    }
+
+    private Workshop createWorkshopFromCsv(String row, String header) {
+        String[] headerData = header.split("\t");
+        String[] rowData = row.split("\t");
+
+        Workshop workshop = new Workshop();
+
+        for (int i = 0; i < headerData.length; i++) {
+            switch (headerData[i]) {
+                case "ID":
+                    System.out.println(rowData[i]);
+                    break;
+                case "CONFIRMED & BREATHE APP APPROVED":
+                    if (!"Y".equals(rowData[i])) {
+                        return null;
+                    }
+                    break;
+                case "TYPE":
+                    if (!rowData[i].isEmpty()) {
+                        workshop.setType(WorkshopType.valueOf(rowData[i]
+                                .replaceAll(" ", "_")
+                                .replace("&", "AND")));
+                    }
+                    break;
+                case "VENUE":
+                    if (!rowData[i].isEmpty()) {
+                        workshop.setLocation(Location.valueOf(rowData[i]
+                                .replaceAll("[ -]", "_")
+                                .replace("&", "AND")
+                                .toUpperCase()));
+                    }
+                    break;
+                case "Start Date & Time MM/DD/YYYY 12H":
+                    workshop.setStartTime(parseDateTime(rowData[i]));
+                    break;
+                case "End Date & Time MM/DD/YYYY 12H":
+                    workshop.setEndTime(parseDateTime(rowData[i]));
+                    break;
+                case "First & Last Name (Public Information)":
+                    // create user or find if one exists
+                    break;
+                case "Contact Information (Public Information) Examples...website / social handles / business emails":
+                    // add contact information to the user
+                    break;
+                case "Teacher Bio (Public Information) Max 300 Words":
+                    // add teacher bio to teacher (or workshop?
+                    break;
+                case "CO-TEACHER(S) First & Last Name. Separate names by comma. Example.. John Smith, Jane Doe":
+                    // add teachers/users
+                    break;
+                case "Workshop Title (ideally 3-12 words)":
+                    workshop.setTitle(rowData[i]);
+                    break;
+                case "Workshop Description  (Max 200 Words)":
+                    workshop.setDescription(rowData[i]);
+                    break;
+                case "Workshop Tags":
+                    // add tags if it's a thing
+                    break;
+                case "UPLOAD IMAGES HERE":
+                    // image url
+                    break;
+            }
+        }
+        return workshop;
+    }
+
+    private LocalDateTime parseDateTime(String dateTime) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/dd/yyyy h:mm a");
+        return LocalDateTime.parse(dateTime, formatter);
     }
 }

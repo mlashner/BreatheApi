@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -40,7 +41,7 @@ public class WorkshopController {
     }
 
     @PostMapping("/populate")
-    public boolean populate() {
+    public boolean populate() throws IOException {
         workshopService.populateWorkshops();
         return true;
     }

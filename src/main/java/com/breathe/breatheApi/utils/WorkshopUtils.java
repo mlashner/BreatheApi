@@ -50,7 +50,7 @@ public class WorkshopUtils {
                 .title("Learn to Slackline")
                 .description("Have you ever been interested in slacklining, and the wonderful community who is doing it? Then this is the perfect class for you. We will talk about the basic skills on a slackline. You will not just learn how to find your balance and to have fun at the same time, but also how to stand and walk on a line. Come out and play!")
                 .type(WorkshopType.SLACKLINING)
-                .location(Location.LOWLINE_PARK)
+                .location(Location.LOWLINE_SLACKLINE_PARK)
                 .build();
 
         Workshop inversions = Workshop.builder()
@@ -59,7 +59,7 @@ public class WorkshopUtils {
                 .title("Slackline Inversions: Using your Legs like Arms")
                 .description("Are you looking for new ways to play on a slackline? Have you ever considered, maybe, using your legs like arms? Slackline supported inversions are rad way to have fun on a line and find a new perspective. In this short workshop, we'll explore playful ways to get upside-down on a slackline, building the basics towards a hands-free shoulder stand.All levels welcome!")
                 .type(WorkshopType.SLACKLINING)
-                .location(Location.PEAK_TO_PEAK)
+                .location(Location.PEAK_TO_PEAK_SLACKLINE_PARK)
                 .build();
 
         Workshop acro = Workshop.builder()
