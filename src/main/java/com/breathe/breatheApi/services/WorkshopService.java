@@ -58,8 +58,7 @@ public class WorkshopService {
 
     private List<Workshop> readWorkshops() throws IOException {
         List<Workshop> workshops = new ArrayList<>();
-        URL url = getClass().getClassLoader().getResource("workshops_2019.tsv");
-        System.out.println(url);
+        URL url = getClass().getClassLoader().getResource("classpath:/workshops_2019.tsv");
         BufferedReader csvReader = new BufferedReader(new FileReader(url.getPath()));
         String header = csvReader.readLine();
         String _appInfo_ = csvReader.readLine();
