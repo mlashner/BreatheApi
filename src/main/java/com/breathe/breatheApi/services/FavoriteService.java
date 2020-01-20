@@ -10,6 +10,7 @@ import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,7 +33,10 @@ public class FavoriteService {
     public List<Workshop> getFavoritesByUserId(Long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ObjectNotFoundException(User.class, "User not found for id :: " + userId));
-        return user.getFavorites().stream().map(Favorite::getWorkshop).collect(Collectors.toList());
+        return user.getFavorites().stream()
+                .map(Favorite::getWorkshop)
+                .sorted(Comparator.comparing(Workshop::getStartTime))
+                .collect(Collectors.toList());
     }
 
     public Favorite createFavorite(Long userId, Long workshopId) {
