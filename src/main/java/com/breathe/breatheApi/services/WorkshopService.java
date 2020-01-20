@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
-import java.net.URL;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -58,10 +58,8 @@ public class WorkshopService {
 
     private List<Workshop> readWorkshops() throws IOException {
         List<Workshop> workshops = new ArrayList<>();
-        URL url = getClass().getClassLoader().getResource("workshops_2019.tsv");
-        System.out.println(url.getFile());
-        System.out.println(url.getPath());
-        BufferedReader csvReader = new BufferedReader(new FileReader(url.getFile()));
+        InputStream is = WorkshopService.class.getResourceAsStream("workshops_2019.tsv");
+        BufferedReader csvReader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
         String header = csvReader.readLine();
         String _appInfo_ = csvReader.readLine();
         String row = csvReader.readLine();
