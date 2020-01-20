@@ -11,6 +11,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -58,8 +59,8 @@ public class WorkshopService {
 
     private List<Workshop> readWorkshops() throws IOException {
         List<Workshop> workshops = new ArrayList<>();
-        InputStream is = WorkshopService.class.getResourceAsStream("workshops_2019.tsv");
-        BufferedReader csvReader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+        InputStream is = this.getClass().getClassLoader().getResourceAsStream("workshops_2019.tsv");
+        BufferedReader csvReader = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
         String header = csvReader.readLine();
         String _appInfo_ = csvReader.readLine();
         String row = csvReader.readLine();
