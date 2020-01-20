@@ -58,9 +58,10 @@ public class WorkshopService {
 
     private List<Workshop> readWorkshops() throws IOException {
         List<Workshop> workshops = new ArrayList<>();
-        URL url = getClass().getClassLoader().getResource("classpath:workshops_2019.tsv");
+        URL url = getClass().getClassLoader().getResource("workshops_2019.tsv");
+        System.out.println(url.getFile());
         System.out.println(url.getPath());
-        BufferedReader csvReader = new BufferedReader(new FileReader(url.getPath()));
+        BufferedReader csvReader = new BufferedReader(new FileReader(url.getFile()));
         String header = csvReader.readLine();
         String _appInfo_ = csvReader.readLine();
         String row = csvReader.readLine();
@@ -84,7 +85,7 @@ public class WorkshopService {
         for (int i = 0; i < headerData.length; i++) {
             switch (headerData[i]) {
                 case "ID":
-                    System.out.println(rowData[i]);
+                    workshop.setId(Long.parseLong(rowData[i]));
                     break;
                 case "CONFIRMED & BREATHE APP APPROVED":
                     if (!"Y".equals(rowData[i])) {
