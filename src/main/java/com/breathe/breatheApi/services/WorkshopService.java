@@ -24,7 +24,7 @@ public class WorkshopService {
     private WorkshopRepository workshopRepository;
 
     public List<Workshop> findAll() {
-        return workshopRepository.findAll(Sort.by(Sort.Direction.ASC, "start_time"));
+        return workshopRepository.findAll(Sort.by(Sort.Direction.ASC, "startTime"));
     }
 
     public Workshop findById(Long id) {
