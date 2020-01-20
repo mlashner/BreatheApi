@@ -5,6 +5,7 @@ import com.breathe.breatheApi.enums.Location;
 import com.breathe.breatheApi.enums.WorkshopType;
 import com.breathe.breatheApi.repositories.WorkshopRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
@@ -23,7 +24,7 @@ public class WorkshopService {
     private WorkshopRepository workshopRepository;
 
     public List<Workshop> findAll() {
-        return workshopRepository.findAll();
+        return workshopRepository.findAll(Sort.by(Sort.Direction.ASC, "start_time"));
     }
 
     public Workshop findById(Long id) {
