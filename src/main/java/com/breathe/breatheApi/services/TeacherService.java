@@ -5,6 +5,7 @@ import com.breathe.breatheApi.repositories.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -28,5 +29,9 @@ public class TeacherService {
 
     public Teacher updateTeacher(Teacher teacher) {
         return repository.save(teacher);
+    }
+
+    public List<Teacher> getAllTeachers() {
+        return repository.findAll();
     }
 }
