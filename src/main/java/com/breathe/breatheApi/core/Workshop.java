@@ -20,7 +20,11 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Workshop extends Base {
+public class Workshop {
+    @Id
+    @Column(name = "id", nullable = false)
+    private Long id;
+
     @Column(name = "title")
     private String title;
 
@@ -50,10 +54,8 @@ public class Workshop extends Base {
     @ManyToOne
     @JoinColumn(name = "primary_instructor_id")
     @JsonIgnoreProperties("primaryWorkshops")
-    private User primaryInstructor;
+    private Teacher primaryInstructor;
 
-    @ManyToOne
-    @JoinColumn(name = "secondary_instructor_id")
-    @JsonIgnoreProperties("secondaryWorkshops")
-    private User secondaryInstructor;
+    @Column(name = "co_teachers")
+    private String coTeachers;
 }

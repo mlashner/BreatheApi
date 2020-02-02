@@ -3,6 +3,7 @@ package com.breathe.breatheApi.enums;
 public enum WorkshopType {
     SLACKLINING,
     ACRO_YOGA,
+    ACROBATICS,
     ART,
     ART_AND_CREATIVITY,
     BREATHE_EVENT,
@@ -13,6 +14,7 @@ public enum WorkshopType {
     HEALING,
     KIDS,
     MEDITATION,
+    MINDFULNESS,
     MUSIC,
     OPEN_MIC,
     SOUND_HEALING,

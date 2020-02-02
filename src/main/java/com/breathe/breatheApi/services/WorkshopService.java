@@ -1,5 +1,6 @@
 package com.breathe.breatheApi.services;
 
+import com.breathe.breatheApi.core.Teacher;
 import com.breathe.breatheApi.core.Workshop;
 import com.breathe.breatheApi.enums.Location;
 import com.breathe.breatheApi.enums.WorkshopType;
@@ -23,6 +24,9 @@ public class WorkshopService {
     @Autowired
     private WorkshopRepository workshopRepository;
 
+    @Autowired
+    private TeacherService teacherService;
+
     public List<Workshop> findAll() {
         return workshopRepository.findAll(Sort.by(Sort.Direction.ASC, "startTime"));
     }
@@ -44,7 +48,7 @@ public class WorkshopService {
         oldWorkshop.setStartTime(workshop.getStartTime());
         oldWorkshop.setEndTime(workshop.getEndTime());
         oldWorkshop.setPrimaryInstructor(workshop.getPrimaryInstructor());
-        oldWorkshop.setSecondaryInstructor(workshop.getSecondaryInstructor());
+        oldWorkshop.setCoTeachers(workshop.getCoTeachers());
         return workshopRepository.save(oldWorkshop);
     }
 
@@ -81,6 +85,7 @@ public class WorkshopService {
         String[] rowData = row.split("\t");
 
         Workshop workshop = new Workshop();
+        Teacher teacher = new Teacher();
 
         for (int i = 0; i < headerData.length; i++) {
             switch (headerData[i]) {
@@ -115,15 +120,23 @@ public class WorkshopService {
                     break;
                 case "First & Last Name (Public Information)":
                     // create user or find if one exists
+                    teacher = teacherService.getOrCreateTeacher(rowData[i]);
+                    workshop.setPrimaryInstructor(teacher);
                     break;
                 case "Contact Information (Public Information) Examples...website / social handles / business emails":
                     // add contact information to the user
+                    if (teacher.getContactInfo().isEmpty()) {
+                        teacher.setContactInfo(rowData[i]);
+                    }
                     break;
                 case "Teacher Bio (Public Information) Max 300 Words":
-                    // add teacher bio to teacher (or workshop?
+                    // add teacher bio to teacher (or workshop?)
+                    if (teacher.getBio().isEmpty()) {
+                        teacher.setBio(rowData[i]);
+                    }
                     break;
                 case "CO-TEACHER(S) First & Last Name. Separate names by comma. Example.. John Smith, Jane Doe":
-                    // add teachers/users
+                    workshop.setCoTeachers(rowData[i]);
                     break;
                 case "Workshop Title (ideally 3-12 words)":
                     workshop.setTitle(rowData[i]);
@@ -136,8 +149,12 @@ public class WorkshopService {
                     break;
                 case "UPLOAD IMAGES HERE":
                     // image url
+                    // TODO: This will be taken care of in a separate image ingest
                     break;
             }
+        }
+        if (teacher.getId() != null) {
+            teacherService.updateTeacher(teacher);
         }
         return workshop;
     }
