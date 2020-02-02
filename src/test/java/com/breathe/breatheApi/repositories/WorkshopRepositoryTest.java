@@ -1,7 +1,7 @@
 package com.breathe.breatheApi.repositories;
 
 import com.breathe.breatheApi.BreatheApiApplicationTests;
-import com.breathe.breatheApi.core.User;
+import com.breathe.breatheApi.core.Teacher;
 import com.breathe.breatheApi.core.Workshop;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +17,12 @@ public class WorkshopRepositoryTest extends BreatheApiApplicationTests {
     private WorkshopRepository workshopRepository;
 
     @Autowired
-    private UserRepository userRepository;
+    private TeacherRepository teacherRepository;
 
     @Test
     public void testCreate() {
         Workshop workshop = Workshop.builder()
+                .id(1L)
                 .title("Come Play With Me")
                 .description("everybody happi")
                 .startTime(LocalDateTime.of(2019, 7, 11, 11, 30))
@@ -38,6 +39,7 @@ public class WorkshopRepositoryTest extends BreatheApiApplicationTests {
     @Transactional
     public void testUpdate() {
         Workshop workshop = Workshop.builder()
+                .id(1L)
                 .title("Come Play With Me")
                 .description("everybody happi")
                 .startTime(LocalDateTime.of(2019, 7, 11, 11, 30))
@@ -48,23 +50,24 @@ public class WorkshopRepositoryTest extends BreatheApiApplicationTests {
         Optional<Workshop> savedWorkshop = workshopRepository.findById(id);
         assertTrue(savedWorkshop.isPresent());
 
-        User user = User.builder()
+        Teacher teacher = Teacher.builder()
                 .fullName("The Dude")
-                .email("thedudeabides@bowling.us")
+                .contactInfo("thedudeabides@bowling.us")
                 .build();
-        user = userRepository.save(user);
+        teacher = teacherRepository.save(teacher);
 
-        savedWorkshop.get().setPrimaryInstructor(user);
+        savedWorkshop.get().setPrimaryInstructor(teacher);
         workshopRepository.save(savedWorkshop.get());
 
         Optional<Workshop> updatedWorkshop = workshopRepository.findById(id);
         assertTrue(updatedWorkshop.isPresent());
-        assertEquals(updatedWorkshop.get().getPrimaryInstructor(), user);
+        assertEquals(updatedWorkshop.get().getPrimaryInstructor(), teacher);
     }
 
     @Test
     public void testDelete() {
         Workshop workshop = Workshop.builder()
+                .id(1L)
                 .title("Come Play With Me")
                 .description("everybody happi")
                 .startTime(LocalDateTime.of(2019, 7, 11, 11, 30))

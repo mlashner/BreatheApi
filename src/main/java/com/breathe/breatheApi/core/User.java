@@ -31,12 +31,4 @@ public class User extends Base {
 
     @OneToMany(mappedBy = "user")
     private List<Favorite> favorites;
-
-    @OneToMany(mappedBy = "primaryInstructor")
-    @JsonIgnoreProperties("primaryInstructor")
-    private List<Workshop> workshops;
-
-    @OneToMany(mappedBy = "secondaryInstructor")
-    @JsonIgnoreProperties("secondaryInstructor")
-    private List<Workshop> secondaryWorkshops;
 }

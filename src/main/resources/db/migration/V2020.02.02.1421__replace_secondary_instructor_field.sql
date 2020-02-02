@@ -1,5 +1,5 @@
 alter table hibernate.workshops
-    drop foreign key workshops_secondary_instructor_id_fkey;
+    drop constraint workshops_secondary_instructor_id_fkey;
 
 alter table hibernate.workshops
     drop column secondary_instructor_id;

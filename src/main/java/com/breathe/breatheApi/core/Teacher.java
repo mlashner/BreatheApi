@@ -17,7 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 public class Teacher extends Base {
     @Column(name = "full_name")
-    private String name;
+    private String fullName;
 
     @Column(name = "bio")
     private String bio;
