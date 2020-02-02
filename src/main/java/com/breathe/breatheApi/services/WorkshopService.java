@@ -125,13 +125,13 @@ public class WorkshopService {
                     break;
                 case "Contact Information (Public Information) Examples...website / social handles / business emails":
                     // add contact information to the user
-                    if (teacher.getContactInfo().isEmpty()) {
+                    if (teacher.getContactInfo() == null || teacher.getContactInfo().isEmpty()) {
                         teacher.setContactInfo(rowData[i]);
                     }
                     break;
                 case "Teacher Bio (Public Information) Max 300 Words":
                     // add teacher bio to teacher (or workshop?)
-                    if (teacher.getBio().isEmpty()) {
+                    if (teacher.getBio() == null || teacher.getBio().isEmpty()) {
                         teacher.setBio(rowData[i]);
                     }
                     break;
