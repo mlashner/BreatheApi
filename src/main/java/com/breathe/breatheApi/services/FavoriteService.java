@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -28,6 +29,11 @@ public class FavoriteService {
     public Favorite findById(Long id) {
         return favoriteRepository.findById(id)
                 .orElseThrow(() -> new ObjectNotFoundException(Favorite.class, "Favorite not found for id :: " + id));
+    }
+
+    public Boolean getIsFavorite(Long userId, Long workshopId) {
+        Optional<Favorite> favorite = favoriteRepository.findByUserIdAndWorkshopId(userId, workshopId);
+        return favorite.isPresent();
     }
 
     public List<Workshop> getFavoritesByUserId(Long userId) {

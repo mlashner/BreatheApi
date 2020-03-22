@@ -19,6 +19,11 @@ public class FavoriteController {
         return favoriteService.getFavoritesByUserId(userId);
     }
 
+    @GetMapping
+    public Boolean getFavoritesByUserId(Long userId, Long workshopId) {
+        return favoriteService.getIsFavorite(userId, workshopId);
+    }
+
     @PostMapping
     public Favorite createFavorite(Long userId, Long workshopId) {
         return favoriteService.createFavorite(userId, workshopId);
