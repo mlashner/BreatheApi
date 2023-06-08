@@ -64,7 +64,7 @@ public class WorkshopService {
 
     private List<Workshop> readWorkshops() throws IOException {
         List<Workshop> workshops = new ArrayList<>();
-        InputStream is = this.getClass().getClassLoader().getResourceAsStream("workshops_2019.tsv");
+        InputStream is = this.getClass().getClassLoader().getResourceAsStream("workshops_2023.tsv");
         BufferedReader csvReader = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
         String header = csvReader.readLine();
         String _appInfo_ = csvReader.readLine();
