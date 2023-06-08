@@ -3,7 +3,7 @@ spring:
     name: breathe
   datasource:
     platform: POSTGRESQL
-    url: ${DATASOURCE_URL:jdbc:postgresql://postgres:L^t19VY@2*3j@localhost:5432/breathe}
+    url: ${HEROKU_POSTGRES_TEAL_URL:jdbc:postgresql://postgres:L^t19VY@2*3j@localhost:5432/breathe}
   jpa:
     generate-ddl: false
     open-in-view: true
