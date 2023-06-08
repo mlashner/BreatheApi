@@ -99,9 +99,7 @@ public class WorkshopService {
                     break;
                 case "TYPE":
                     if (!rowData[i].isEmpty()) {
-                        workshop.setType(WorkshopType.valueOf(rowData[i]
-                                .replaceAll(" ", "_")
-                                .replace("&", "AND")));
+                        workshop.setType(rowData[i]);
                     }
                     break;
                 case "VENUE":
