@@ -104,10 +104,7 @@ public class WorkshopService {
                     break;
                 case "VENUE":
                     if (!rowData[i].isEmpty()) {
-                        workshop.setLocation(Location.valueOf(rowData[i]
-                                .replaceAll("[ -]", "_")
-                                .replace("&", "AND")
-                                .toUpperCase()));
+                        workshop.setLocation(rowData[i]);
                     }
                     break;
                 case "Start Date & Time MM/DD/YYYY 12H":

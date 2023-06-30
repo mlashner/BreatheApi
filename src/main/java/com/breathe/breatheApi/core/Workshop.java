@@ -27,9 +27,8 @@ public class Workshop {
     @Column(name = "title")
     private String title;
 
-    @Enumerated(EnumType.STRING)
     @Column(name = "location")
-    private Location location;
+    private String location;
 
     @Column(name = "type")
     private String type;
